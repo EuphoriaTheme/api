@@ -9,6 +9,7 @@ const galleryRouter = require('./routes/gallery');
 const authRouter = require('./routes/auth');
 const accountRouter = require('./routes/account');
 const dataRouter = require('./routes/data');
+const downloadRouter = require('./routes/download');
 const cron = require('node-cron'); // Import node-cron
 const fetchAndSaveProducts = require('./utils/fetchProducts'); // Import the function
 
@@ -39,17 +40,18 @@ app.use('/auth', authRouter);
 app.use('/api', apiRouter);
 app.use('/data', dataRouter);
 app.use('/account', authenticate, accountRouter);
-app.use('/api/gallery', authenticate, galleryRouter);
+app.use('/gallery', authenticate, galleryRouter);
+app.use('/download', authenticate, downloadRouter);
 
 // Catch 404 Not Found errors
 app.use((req, res) => {
-  res.status(404).send('Error 404 Page Not Found');
+  res.status(404).send('Error 404: Page Not Found');
 });
 
 // Global error handling
 app.use((err, req, res, next) => {
   if (err.status === 401) {
-    return res.status(401).send('Error 401 Unauthorized');
+    return res.status(401).send('Error 401: Unauthorized');
   }
   if (err.status === 403) {
     return res.status(403).send('Error 403: Forbidden');
