@@ -10,6 +10,7 @@ const authRouter = require('./routes/auth');
 const accountRouter = require('./routes/account');
 const dataRouter = require('./routes/data');
 const downloadRouter = require('./routes/download');
+const adminRouter = require('./routes/admin');
 const cron = require('node-cron'); // Import node-cron
 const fetchAndSaveProducts = require('./utils/fetchProducts'); // Import the function
 
@@ -39,6 +40,7 @@ app.use(jwtParser); // Add JWT parser middleware
 app.use('/auth', authRouter);
 app.use('/api', apiRouter);
 app.use('/data', dataRouter);
+app.use('/admin', authenticate, adminRouter);
 app.use('/account', authenticate, accountRouter);
 app.use('/gallery', authenticate, galleryRouter);
 app.use('/download', authenticate, downloadRouter);
