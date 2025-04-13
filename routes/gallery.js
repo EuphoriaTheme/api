@@ -74,7 +74,7 @@ router.delete('/delete', async (req, res) => {
     return res.status(403).json({ success: false, message: 'Unauthorized access.' });
   }
 
-  const userDir = path.join(__dirname, '../public', req.user.userID.toString());
+  const userDir = path.join(__dirname, '../uploads/gallery', req.user.userID.toString());
   const fullPath = path.join(userDir, path.basename(imagePath));
 
   try {

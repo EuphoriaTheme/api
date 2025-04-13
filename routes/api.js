@@ -110,15 +110,6 @@ router.get('/status', (req, res) => {
   });
 });
 
-router.get('/telemetry', (req, res) => {
-  const ApiVersion = process.env.API_VERSION; // Get version from .env
-  res.json({
-    success: true,
-    status: 'online',
-    version: ApiVersion,
-  });
-});
-
 // API endpoint to get the image file for a Minecraft version
 router.get('/mclogs/version', (req, res) => {
   const { serverName } = req.query;
@@ -160,18 +151,8 @@ router.get('/mclogs/version', (req, res) => {
   }
 });
 
-// Serve CSS files with authentication
-router.get('/styling/css2', (req, res) => {
-  res.sendFile(path.join(__dirname, '../private/css/announcement.css'));
-});
-
 router.get('/js/sort', (req, res) => {
   res.sendFile(path.join(__dirname, '../private/js/Sortable.min.js'));
-});
-
-// Serve GameAPI Download with authentication
-router.get('/download/game-api', authenticate, (req, res) => {
-  res.sendFile(path.join(__dirname, '../private/downloads/game-api.zip'));
 });
 
 // Fetch GameAPI version with authentication
