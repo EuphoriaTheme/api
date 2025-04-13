@@ -1,0 +1,110 @@
+products:
+  - name: Euphoria
+    description: Feature-packed and highly-customizable theme.
+    image: https://blueprint.zip/browse/assets/euphoriatheme.jpg
+    installations: 22
+    links:
+      - price: 12.99
+        currency: USD
+        label: BUILTBYBIT
+        url: https://builtbybit.com/resources/euphoria.52856
+      - price: 11
+        currency: GBP
+        label: SOURCEXCHANGE
+        url: https://www.sourcexchange.net/products/euphoriatheme
+  - name: MC Logs
+    description: Easily send Server Logs to MCLOGS API with a few Clicks.
+    image: https://blueprint.zip/browse/assets/mclogs.jpg
+    installations: 43
+    links:
+      - price: 0
+        currency: USD
+        label: BUILTBYBIT
+        url: https://builtbybit.com/resources/mc-logs.54597
+      - price: 4
+        currency: GBP
+        label: SOURCEXCHANGE
+        url: https://www.sourcexchange.net/products/mc-logs
+  - name: Refresh
+    description: Dark admin theme for Pterodactyl
+    image: https://blueprint.zip/browse/assets/refreshtheme.png
+    installations: 3
+    links:
+      - price: 0
+        currency: USD
+        label: BUILTBYBIT
+        url: https://builtbybit.com/resources/refresh.53993
+      - price: 4
+        currency: GBP
+        label: SOURCEXCHANGE
+        url: https://www.sourcexchange.net/products/refresh
+  - name: Player Listing
+    description: Show player count and (if supported) connected players.
+    image: https://blueprint.zip/browse/assets/playerlisting.jpg
+    installations: 18
+    links:
+      - price: 0
+        currency: USD
+        label: BUILTBYBIT
+        url: https://builtbybit.com/resources/player-listing.53200
+      - price: 7
+        currency: GBP
+        label: SOURCEXCHANGE
+        url: https://www.sourcexchange.net/products/playerlisting
+  - name: Server Backgrounds
+    description: Add custom backgrounds to each server.
+    image: https://blueprint.zip/browse/assets/serverbackgrounds.jpg
+    installations: 79
+    links:
+      - price: 0
+        currency: USD
+        label: BUILTBYBIT
+        url: https://builtbybit.com/resources/server-backgrounds.53917
+      - price: 4
+        currency: GBP
+        label: SOURCEXCHANGE
+        url: https://www.sourcexchange.net/products/server-backgrounds
+  - name: Console Logs
+    description: Copy your console logs with a single click.
+    image: https://blueprint.zip/browse/assets/consolelogs.jpg
+    installations: 9
+    links:
+      - price: 0
+        currency: USD
+        label: BUILTBYBIT
+        url: https://builtbybit.com/resources/console-logs.54296
+      - price: 4
+        currency: GBP
+        label: SOURCEXCHANGE
+        url: https://www.sourcexchange.net/products/console-logs
+  - name: Resource Alerts
+    description: Let users know when their server is low on resources.
+    image: https://blueprint.zip/browse/assets/resourcealerts.jpg
+    installations: 3
+    links:
+      - price: 0
+        currency: USD
+        label: BUILTBYBIT
+        url: https://builtbybit.com/resources/resource-alerts.63143
+  - name: Translations
+    description: Multi-language support for Pterodactyl
+    image: https://blueprint.zip/browse/assets/translations.jpg
+    installations: 9
+    links:
+      - price: 8.99
+        currency: USD
+        label: BUILTBYBIT
+        url: https://builtbybit.com/resources/translations.63254
+  - name: Laravel Logs
+    description: View and download Laravel logs in your admin panel.
+    image: https://blueprint.zip/browse/assets/laravellogs.jpg
+    installations: 5
+    links:
+      - price: 0
+        currency: USD
+        label: BUILTBYBIT
+        url: https://builtbybit.com/resources/laravel-logs.53343
+      - price: 4
+        currency: GBP
+        label: SOURCEXCHANGE
+        url: https://www.sourcexchange.net/products/laravel-logs

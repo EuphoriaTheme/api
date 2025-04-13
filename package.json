@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "axios": "^1.8.4",
+    "compression": "^1.8.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "gamedig": "^5.2.0",
+    "js-yaml": "^4.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "minecraft-server-util": "^5.4.4",
+    "multer": "^1.4.5-lts.2",
+    "mysql2": "^3.14.0",
+    "node-cron": "^3.0.3"
+  }
+}
