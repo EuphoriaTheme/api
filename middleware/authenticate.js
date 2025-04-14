@@ -1,12 +1,14 @@
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql2/promise');
+require('dotenv').config(); // Load environment variables from .env
 
-// MySQL connection pool
+// MySQL connection pool using environment variables
 const db = mysql.createPool({
-  host: '192.168.1.232',
-  user: 'euphoriaapi',
-  password: 'nTBeE38AhIprEXgp',
-  database: 'euphoriaapi',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT, // Optional: Include if your database uses a non-default port
 });
 
 async function authenticate(req, res, next) {

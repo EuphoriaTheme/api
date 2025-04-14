@@ -18,7 +18,7 @@ router.get('/products', (req, res) => {
         const parsedData = yaml.load(fileContents);
         products = parsedData.products;
     } catch (error) {
-        console.error('Error loading donators.yml:', error);
+        console.error('Error loading products.yml:', error);
     }
 
   res.json({
@@ -61,6 +61,24 @@ router.get('/contributors', (req, res) => {
     success: true,
     contributors,
   });
+});
+
+router.get('/team', (req, res) => {
+
+  const teamFilePath = path.join(__dirname, 'public', 'team.yml');
+  let team = [];
+  try {
+      const fileContents = fs.readFileSync(teamFilePath, 'utf8');
+      const parsedData = yaml.load(fileContents);
+      team = parsedData.team;
+  } catch (error) {
+      console.error('Error loading team.yml:', error);
+  }
+
+res.json({
+  success: true,
+  team,
+});
 });
 
 module.exports = router;
