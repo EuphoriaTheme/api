@@ -2,20 +2,13 @@ const express = require('express');
 const router = express.Router();
 const compression = require('compression'); // For response compression
 const authenticate = require('../middleware/authenticate');
+const isAdmin = require('../middleware/isAdmin');
 const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
 // Middleware for response compression
 router.use(compression());
-
-// Middleware to check if the user is an admin
-function isAdmin(req, res, next) {
-  if (req.user && req.user.admin === 1) {
-    return next();
-  }
-  return res.status(403).json({ message: 'Access denied: Admins only' });
-}
 
 // Route to view telemetry information
 router.get('/telemetry', authenticate, isAdmin, async (req, res) => {
@@ -77,6 +70,24 @@ router.put('/users/:id/admin', authenticate, isAdmin, async (req, res) => {
     res.json({ message: 'User has been assigned as an admin' });
   } catch (error) {
     console.error('Error assigning admin role:', error.message);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// Route to remove admin role from a user
+router.put('/users/:id/remove-admin', authenticate, isAdmin, async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const [result] = await req.db.query('UPDATE users SET admin = 0 WHERE id = ?', [userId]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ message: 'Admin privileges have been removed from the user' });
+  } catch (error) {
+    console.error('Error removing admin role:', error.message);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });

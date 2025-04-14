@@ -17,7 +17,7 @@ const db = mysql.createPool({
  
 // Multer configuration for avatar uploads
 const storage = multer.diskStorage({
-  destination: '../uploads/avatars',
+  destination: './uploads/avatars',
   filename: (req, file, cb) => {
     const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1e9) + path.extname(file.originalname);
     cb(null, uniqueName);

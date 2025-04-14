@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const authenticate = require('./middleware/authenticate');
+const restrictAccess = require('./middleware/restrictAccess');
 const cookieParser = require('cookie-parser');
 const jwtParser = require('./middleware/jwtParser'); // Import the middleware
 const apiRouter = require('./routes/api');
@@ -30,20 +31,16 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'uploads')));
-app.use((req, res, next) => {
-  req.db = db;
-  next();
-});
 
 app.use(jwtParser); // Add JWT parser middleware
 
-app.use('/auth', authRouter);
+app.use('/auth', restrictAccess, authRouter);
 app.use('/api', apiRouter);
-app.use('/data', dataRouter);
-app.use('/admin', authenticate, adminRouter);
-app.use('/account', authenticate, accountRouter);
+app.use('/data', restrictAccess, dataRouter);
+app.use('/admin', restrictAccess, authenticate, adminRouter);
+app.use('/account', restrictAccess, authenticate, accountRouter);
 app.use('/gallery', authenticate, galleryRouter);
-app.use('/download', authenticate, downloadRouter);
+app.use('/download', restrictAccess, authenticate, downloadRouter);
 
 // Catch 404 Not Found errors
 app.use((req, res) => {
