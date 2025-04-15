@@ -3,25 +3,33 @@ const pingServer = require('../../utils/ping.js');
 
 async function handleGta5f(ip, port, res) {
   try {
-    const playerData = await axios.get(`http://${ip}:${port}/players.json`);
-    const serverData = await axios.get(`http://${ip}:${port}/info.json`);
+    // Fetch player and server data
+    const playerDataResponse = await axios.get(`http://${ip}:${port}/players.json`);
+    const serverDataResponse = await axios.get(`http://${ip}:${port}/info.json`);
     const ping = await pingServer(ip, parseInt(port, 10));
 
-    const players = playerData.players.map((player) => ({
-        name: player.name,
-        uuid: player.identifiers.find((id) => id.startsWith("fivem")) || 'unknown',
-        discord: player.identifiers.find((id) => id.startsWith("discord")),
-        steam: player.identifiers.find((id) => id.startsWith("steam")),
-        identifier: player.identifiers.find((id) => id.startsWith("license")),
-        ping: player.ping,
+    // Extract player data
+    const players = (playerDataResponse.data || []).map((player) => ({
+      name: player.name || 'Unknown',
+      uuid: player.identifiers?.find((id) => id.startsWith('fivem')) || 'unknown',
+      discord: player.identifiers?.find((id) => id.startsWith('discord')) || null,
+      steam: player.identifiers?.find((id) => id.startsWith('steam')) || null,
+      identifier: player.identifiers?.find((id) => id.startsWith('license')) || null,
+      ping: player.ping || 0,
     }));
-  
+
+    // Extract server data
+    const serverData = serverDataResponse.data || {};
+    const maxPlayers = parseInt(serverData.vars?.sv_maxClients, 10) || 0;
+    const numPlayers = players.length; // Corrected: Accessing the length property
+
+    // Send response
     res.json({
       success: true,
       data: {
         players,
-        maxPlayers: parseInt(serverData.sv_maxclients, 10),
-        numPlayers: parseInt(serverData.clients, 10),
+        maxPlayers,
+        numPlayers,
         ping,
       },
     });
