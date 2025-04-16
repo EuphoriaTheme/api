@@ -7,6 +7,7 @@ const handleGta5f = require('./gameHandlers/gta5fHandler');
 const handleBeammp = require('./gameHandlers/beammpHandler');
 const handleMinecraft = require('./gameHandlers/minecraftHandler');
 const handleDefaultGame = require('./gameHandlers/defaultGameHandler');
+const handleRust = require('./gameHandlers/rustHandler');
 const authenticate = require('../middleware/authenticate');
 require('dotenv').config();
 
@@ -94,6 +95,10 @@ router.get('/:game/ip=:ip&port=:port', async (req, res) => {
 
   if (game === 'minecraft') {
     return handleMinecraft(ip, port, res);
+  }
+
+  if(game === 'rust') {
+    return handleRust(ip, port, res);
   }
 
   return handleDefaultGame(game, ip, port, res);

@@ -1,9 +1,10 @@
 donators:
   - name: "VeltrixStudio"
     tier: "Donator +"
-    avatar: "/images/donators/veltrixStudio.jpg"
+    avatar: "/images/donators/VeltrixStudio.png"
     site: "https://veltrixstudio.uk/"
   - name: "MythicalSystems"
     tier: "Our Webhosting Provider"
-    avatar: "/images/donators/mythicalSystems.png"
+    avatar: "/images/donators/MythicalSystems.png"
     site: "https://www.mythical.systems/"
+    discordId: "964966303385387108"

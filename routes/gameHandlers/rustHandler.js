@@ -1,10 +1,9 @@
 const { GameDig } = require('gamedig');
 
-async function handleMinecraft(ip, port, res) {
+async function handleRust(ip, port, res) {
   try {
-    // Query the Minecraft server
-    const serverData = await GameDig.query({ type: 'minecraft', host: ip, port: parseInt(port, 10) });
-    console.log(serverData); // Log the server data for debugging
+    // Query the Rust server
+    const serverData = await GameDig.query({ type: 'rust', host: ip, port: parseInt(port, 10) });
     // Transform the data into a structured response
     const response = {
       success: true,
@@ -23,9 +22,9 @@ async function handleMinecraft(ip, port, res) {
 
     res.json(response);
   } catch (error) {
-    console.error(`Error querying Minecraft server: ${error.message}`);
+    console.error(`Error querying Rust server: ${error.message}`);
     res.status(500).json({ success: false, error: error.message });
   }
 }
 
-module.exports = handleMinecraft;
+module.exports = handleRust;

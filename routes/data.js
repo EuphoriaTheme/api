@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const yaml = require('js-yaml'); // Import js-yaml
 const compression = require('compression'); // For response compression
+const enrichWithDiscordStatus = require('../utils/enrichWithDiscordStatus'); // Import the utility function
 require('dotenv').config();
 
 // Middleware for response compression
@@ -28,57 +29,44 @@ router.get('/products', (req, res) => {
 });
 
 router.get('/donators', (req, res) => {
+  const donatorsFilePath = path.join(__dirname, '..', 'public', 'donators.yml');
+  let donators = [];
+  try {
+      const fileContents = fs.readFileSync(donatorsFilePath, 'utf8');
+      const parsedData = yaml.load(fileContents);
+      donators = parsedData.donators;
 
-    const donatorsFilePath = path.join(__dirname, 'public', 'donators.yml');
-    let donators = [];
-    try {
-        const fileContents = fs.readFileSync(donatorsFilePath, 'utf8');
-        const parsedData = yaml.load(fileContents);
-        donators = parsedData.donators;
-    } catch (error) {
-        console.error('Error loading donators.yml:', error);
-    }    
+      donators= enrichWithDiscordStatus(donators);
+
+  } catch (error) {
+      console.error('Error loading donators.yml:', error);
+  }
 
   res.json({
-    success: true,
-    donators,
+      success: true,
+      donators,
   });
 });
 
 router.get('/contributors', (req, res) => {
-
-    const contributorsFilePath = path.join(__dirname, 'public', 'contributors.yml');
-    let contributors = [];
-    try {
-        const fileContents = fs.readFileSync(contributorsFilePath, 'utf8');
-        const parsedData = yaml.load(fileContents);
-        contributors = parsedData.contributors;
-    } catch (error) {
-        console.error('Error loading contributors.yml:', error);
-    }
-
-  res.json({
-    success: true,
-    contributors,
-  });
-});
-
-router.get('/team', (req, res) => {
-
-  const teamFilePath = path.join(__dirname, 'public', 'team.yml');
-  let team = [];
+  const contributorsFilePath = path.join(__dirname, '..', 'public', 'contributors.yml');
+  let contributors = [];
   try {
-      const fileContents = fs.readFileSync(teamFilePath, 'utf8');
+      const fileContents = fs.readFileSync(contributorsFilePath, 'utf8');
       const parsedData = yaml.load(fileContents);
-      team = parsedData.team;
+      contributors = parsedData.contributors;
+
+      // Add online status if discordId is available
+      contributors = enrichWithDiscordStatus(contributors);
+
   } catch (error) {
-      console.error('Error loading team.yml:', error);
+      console.error('Error loading contributors.yml:', error);
   }
 
-res.json({
-  success: true,
-  team,
-});
+  res.json({
+      success: true,
+      contributors,
+  });
 });
 
 module.exports = router;
